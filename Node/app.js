@@ -10,6 +10,7 @@ process.env.CONFIG = JSON.stringify(CONFIG);
 
 const defaultRoute = require("./app/routes/default.route.js");
 
+// Route definition
 app.use(defaultRoute);
 app.use("/admin", express.static(path.join(__dirname, "public/admin")));
 app.use("/watch", express.static(path.join(__dirname, "public/watch")));
