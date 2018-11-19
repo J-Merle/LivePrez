@@ -22,7 +22,7 @@ describe('Test de content.model', () => {
         content.fileName = content.id + ".txt";
         content.setData("It Works !");
 
-        //return _p(fs.mkdir)(CONFIG.contentDirectory);
+        return _p(fs.mkdir)(CONFIG.contentDirectory);
     });
 
     // beforeEach('', () => {

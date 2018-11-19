@@ -1,6 +1,6 @@
 {
     "port": 1337,
-    "contentDirectory": "./content",
+    "contentDirectory": "/home/lycos/Repositories/LivePrez/Node/content/",
     "presentationDirectory": "./presentation"
 
 }

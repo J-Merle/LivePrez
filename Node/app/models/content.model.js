@@ -1,6 +1,7 @@
 "use strict";
 
 let CONFIG = JSON.parse(process.env.CONFIG);
+let utils = require('../utils/utils')
 const fs = require('fs');
 
 
@@ -32,47 +33,123 @@ ContentModel.prototype.getData = function(data) {
 }
 
 ContentModel.create =  function(content, callback) {
-  let path= '';
-  if(this.type === 'img') {
-    path = `${CONFIG.contentDirectory}/${content.fileName}`;
-  } else {
-    path = `${CONFIG.contentDirectory}/${content.id}.mesa.json`;
+
+  if(content === null ||  content.type === undefined|| content.id === undefined|| !(content instanceof ContentModel) ) {
+    callback(new Error("The content is invalid"));
+    return;
   }
 
-  fs.writeFile(path, JSON.parse(content), function(err) {
-    if(err) {
-      return console.log(err);
-    }
+
+  if(content.type === 'img' && content.fileName !== undefined) {
+
+    var contentPath = utils.getDataFilePath(content.fileName);
+
+    fs.open(contentPath, 'w+', (errOpen, fd) => {
+      if(errOpen) { callback(errOpen); return; }
+
+      fs.writeFile(contentPath, content.data, function(err) {
+        if(err) { callback(err); return; }
+
+        fs.close(fd, (err) => {callback(err); return;});
+      });
+    });
+  }
+
+  var metaDataPath = utils.getMetaFilePath(content.id);
+
+  fs.open( metaDataPath, 'w+', (errOpen, fd) => {
+    if(errOpen) { callback(errOpen); return; }
+
+    fs.writeFile(metaDataPath, JSON.stringify(content, null, 4), function(err) {
+      if(err) {
+        callback(err); 
+        return;
+      }
+      fs.close(fd, (err) => {callback(err); return;});
+    });
   });
 }
 
 ContentModel.read = function(id, callback) {
-  var path = `${CONFIG.contentDirectory}/${id}.mesa.json`;
-  fs.readFile(path, function(err, data){
-    if(err) {
-      return console.log(err);
-    }
-    return data;
+
+  if( id === null) {callback( new Error("Can not read a content if the id is null")); return; }
+
+  var path = utils.getMetaFilePath(id);
+
+  fs.readFile(path, 'utf8', (err, data) => {
+    if(err) { callback(err); return;}
+    var parsedData = JSON.parse(data);
+    var result = new ContentModel(parsedData);
+    result.setData(parsedData.data);
+    callback(null, result);
   });
+
 }
 
-ContentModel.update = function(content, callback) {}
+ContentModel.update = function(content, callback) {
+
+  if(content === null ||  content.type === undefined|| content.id === undefined|| !(content instanceof ContentModel) ) {
+    callback(new Error("The content is invalid"));
+    return;
+  }
+
+  var metaDataPath = utils.getMetaFilePath(content.id);
+  utils.fileExists(metaDataPath, (err) => {
+    if(err) { callback(new Error("The file doesn't exists")); return; }
+
+    fs.open( metaDataPath, 'w+', (errOpen, fd) => {
+      if(errOpen) { callback(errOpen); return; }
+
+      fs.writeFile(metaDataPath, JSON.stringify(content, null, 4), function(err) {
+        if(err) { callback(err); return;}
+        fs.close(fd, (err) => {callback(err); return;});
+      });
+
+      if(content.type === 'img' && content.data !== undefined && content.data.length > 0) {
+        var dataPath = utils.getDataFilePath(content.fileName);
+        fs.open(dataPath, 'w+', (errOpen, fd) => {
+          if(errOpen) { callback(errOpen); return; }
+
+          fs.writeFile(dataPath, content.data, function(err) {
+            if(err) { callback(err); return; }
+
+            fs.close(fd, (err) => {callback(err); return;});
+          });
+        });
+
+      }
+
+    });
+  });
+
+}
 
 ContentModel.delete = function(id, callback) {
+  if(id === null) {
+    callback(new Error("Can not delete, the id is null"));
+    return; 
+  }
 
-  var path = `${CONFIG.contentDirectory}/${id}.mesa.json`;
-  fs.readFile(path, function(err){
-    if(err) {
-      return console.log(err);
-    }
-  });
+  var path = utils.getMetaFilePath(id);
+  fs.readFile(path, 'utf8', (err, data) => {
+    if(err) { callback(err); return;}
+    var parsedData = JSON.parse(data);
 
-  path = `${CONFIG.contentDirectory}/${this.fileName}`;
-  fs.readFile(path, function(err){
-    if(err) {
-      return console.log(err);
-    }
+    fs.unlink(path, function(err){
+      if(err) { callback(err); return;}
+
+      if(parsedData.fileName === undefined) {
+        callback(new Error("Can not delete, the id is null"));
+        return; 
+      }
+      var dataFilePath = utils.getDataFilePath(parsedData.fileName);
+      fs.unlink(dataFilePath, function(err){
+        if(err) { callback(err); return;}
+        callback(null, null);
+      });
+    });
   });
 }
+
 
 module.exports = ContentModel;
