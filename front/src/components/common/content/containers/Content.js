@@ -12,7 +12,7 @@ export default class Content extends React.Component {
         switch (this.props.type) {
             case 'img':
             case 'img_url':
-                return <img className="center" src={this.props.src} alt={this.props.title} />;
+                return <img src={this.props.src} alt={this.props.title} />;
             case 'video':
                 return <iframe width="100%" src={this.props.src}></iframe>;
             case 'web':
