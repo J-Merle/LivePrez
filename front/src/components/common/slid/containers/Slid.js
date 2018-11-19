@@ -9,7 +9,7 @@ export default class Slid extends React.Component {
         super(props);
 
         this.state = {
-            thumbnail: this.props.contentMap['temp']
+            thumbnail: this.props.contentMap[this.props.content_id]
         }
     }
 
