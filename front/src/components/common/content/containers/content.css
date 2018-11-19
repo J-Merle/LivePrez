@@ -1,5 +1,6 @@
 .content {
-    border: 1px solid gray;
+    border: 1px solid lightgray;
+    border-radius: 6px;
     margin-bottom: 1vh;
     text-align: center;
 }
