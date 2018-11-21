@@ -41,12 +41,12 @@ public class User implements Serializable {
         }
 
         if (this.getRole() == null) {
-            this.setRole(Role.WATCHER);
+            this.setRole(Role.NONE);
         }
     }
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
     private String lastName;

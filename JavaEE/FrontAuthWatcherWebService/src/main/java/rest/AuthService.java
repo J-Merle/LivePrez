@@ -29,6 +29,8 @@ public class AuthService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response logIn(User user) {
 
+        System.out.println(user.toString());
+
         Response.ResponseBuilder builder;
 
         sender.sendMessage(user);
