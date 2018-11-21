@@ -1,0 +1,19 @@
+{
+    "id": "0",
+    "title": "this is my presentation",
+    "description": "bla bla bla bla blabla",
+    "slidArray": [
+        {
+            "id": "1",
+            "title": "A",
+            "txt": "some txt here",
+            "content_id":"66ed0bf7-cf47-4dfb-a12a-35e974f2165a"
+        },
+        {
+            "id": "2",
+            "title": "B",
+            "txt": " new slid no text",
+			"content_id":"800c7731-5406-4bb0-8984-858641996f61"
+        }
+    ]
+}

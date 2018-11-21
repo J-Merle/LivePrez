@@ -26,7 +26,7 @@ exports.list = function(request, response) {
       response.end();
     } else {
       files = files.filter(function(fileName) {return path.extname(fileName) === ".json"});
-      if (files.lenth === 0) {
+      if (files.length === 0) {
         response.writeHead(200, {"Content-Type" : "application/json"}); 
         response.end(JSON.stringify(contents)); 
         utils.logRequest(request, response);
