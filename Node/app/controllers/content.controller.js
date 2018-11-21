@@ -21,9 +21,18 @@ exports.list = function(request, response) {
   var contents = {};
 
   fs.readdir(CONFIG.contentDirectory, (err, files) => { 
-    files.forEach(function(fileName,index){ 
-
-      if (path.extname(fileName) === ".json") { 
+    if(err) {
+      response.writeHead(500, {"Content-Type" : "application/json"}); 
+      response.end();
+    } else {
+      files = files.filter(function(fileName) {return path.extname(fileName) === ".json"});
+      if (files.lenth === 0) {
+        response.writeHead(200, {"Content-Type" : "application/json"}); 
+        response.end(JSON.stringify(contents)); 
+        utils.logRequest(request, response);
+        return;
+      }
+      files.forEach(function(fileName,index){ 
         fs.readFile(CONFIG.contentDirectory + fileName, function(errFile, data){ 
           if(errFile){ 
             console.log(errFile.message); 
@@ -35,8 +44,8 @@ exports.list = function(request, response) {
             response.end(JSON.stringify(contents)); 
           } 
         }); 
-      } 
-    }) 
+      }) 
+    }
   }); 
 
   utils.logRequest(request, response);
