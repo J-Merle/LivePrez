@@ -50,12 +50,15 @@ exports.create = function(request, response) {
     title: request.body.title
   }
   if( contentData.type === 'img' ) {
-    contentData.file = request.file;
+    contentData.data = JSON.stringify(request.file);
+    contentData.fileName = request.file.filename;
   } else {
     contentData.src = request.body.src
   }
 
-  ContentModel.create(new ContentModel(contentData), (err) => {
+  var content = new ContentModel(contentData);
+  content.setData(contentData.data);
+  ContentModel.create(content, (err) => {
     if(err) {
       response.writeHead(422, {"Content-Type" : "application/json"});
       response.end(JSON.stringify(err));

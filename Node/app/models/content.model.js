@@ -1,4 +1,4 @@
-"use strict";
+ "use strict";
 
 let CONFIG = JSON.parse(process.env.CONFIG);
 let utils = require('../utils/utils')
@@ -49,8 +49,6 @@ ContentModel.create =  function(content, callback) {
 
       fs.writeFile(contentPath, content.data, function(err) {
         if(err) { callback(err); return; }
-
-        fs.close(fd, (err) => {callback(err); return;});
       });
     });
   }
