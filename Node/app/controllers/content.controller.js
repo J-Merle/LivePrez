@@ -80,6 +80,39 @@ exports.create = function(request, response) {
 
 
 }
-exports.read= function(request, response) {}
+exports.read= function(request, response) {
+
+  const contentId = request.params.contentId;
+  ContentModel.read(contentId, (err, content) => {
+    if(err) {
+      response.writeHead(404, {"Content-Type" : "application/json"});
+      response.end(JSON.stringify("Content not found"));
+      utils.logRequest(request, response);
+      return;
+    }
+    if(request.query.json === 'true') {
+      response.writeHead(200, {"Content-Type" : "application/json"});
+      response.end(JSON.stringify(content));
+      utils.logRequest(request, response);
+      return;
+    }
+    if(content.type === "img") {
+      response.sendFile(utils.getDataFilePath(content.fileName));
+      utils.logRequest(request, response);
+      return;
+    } else {
+      response.writeHead(302, {
+        'Location': content.src
+      });
+      response.end();
+      utils.logRequest(request, response);
+      return;
+    }
+
+
+  });
+    
+
+}
 exports.update= function(request, response) {}
 exports.delete= function(request, response) {}
