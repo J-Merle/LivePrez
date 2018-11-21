@@ -7,27 +7,34 @@ export default class Presentation extends React.Component {
     constructor(props) {
         super(props);
 
-        console.log(this.props.slidArray);
+        this.state = {
+            title: this.props.title,
+            description: this.props.description
+        }
+
         this.handleChangeTitle = this.handleChangeTitle.bind(this);
         this.handleChangeDesc = this.handleChangeDesc.bind(this);
         this.displaySlids = this.displaySlids.bind(this);
     }
 
     handleChangeTitle(e) {
-        this.props.title = e.target.value;
+        this.setState({
+            title: e.target.value
+        });
     }
 
     handleChangeDesc(e) {
-        this.props.description = e.target.value;
+        this.setState({
+            description: e.target.value
+        });
     }
 
     displaySlids() {
         let slidMap = this.props.slidArray.map(
             (slid) =>
                 <Slid id={slid.id} title={slid.title} txt={slid.txt}
-                    content_id={slid.content_id} contentMap={this.props.contentMap} displayMode="FULL_MNG" />
+                    content_id={slid.content_id} contentMap={this.props.contentMap} displayMode="SHORT" />
         );
-        console.log(slidMap);
         return slidMap;
     }
 
@@ -41,7 +48,7 @@ export default class Presentation extends React.Component {
                         className="form-control"
                         id="currentSlideTitle"
                         onChange={this.handleChangeTitle}
-                        value={this.props.title}
+                        value={this.state.title}
                     />
                     <label htmlFor="currentSlideText">Description</label>
                     <textarea
@@ -50,7 +57,7 @@ export default class Presentation extends React.Component {
                         className="form-control"
                         id="currentSlideText"
                         onChange={this.handleChangeDesc}
-                        value={this.props.description}>
+                        value={this.state.description}>
                     </textarea>
                 </div>
                 <div>
