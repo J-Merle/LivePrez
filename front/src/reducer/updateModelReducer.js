@@ -1,14 +1,15 @@
 var Tools = require('../services/Tools.js');
 
 const updateModelReducer = (state = { presentation: {}, content_map: {} }, action) => {
-    console.log(action);
+    console.log('action type: '+action.type)
     switch (action.type) {
         case 'UPDATE_PRESENTATION':
-            return state.presentation;
+            return state;
         case 'UPDATE_PRESENTATION_SLIDS':
-            return state.presentation.slidArray;
+            const newSlid = { presentation: action.obj };
+            return newSlid;
         case 'UPDATE_CONTENT_MAP':
-            return state.content_map;
+            return state;
         case 'ADD_CONTENT':
             return;
         default:

@@ -9,8 +9,13 @@ class EditSlidPanel extends React.Component {
 
     render() {
         return (
-            <Slid id={this.props.selected_slid.id} title={this.props.selected_slid.title} txt={this.props.selected_slid.txt}
-                content_id={this.props.selected_slid.content_id} contentMap={this.props.contentMap} displayMode="FULL_MNG" />
+            <Slid id={this.props.selected_slid.id}
+                title={this.props.selected_slid.title}
+                txt={this.props.selected_slid.txt}
+                content_id={this.props.selected_slid.content_id}
+                contentMap={this.props.contentMap}
+                displayMode="FULL_MNG" 
+            />
         );
     }
 }

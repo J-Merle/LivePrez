@@ -1,9 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './presentation.css';
 import '../../../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css';
 import Slid from './../../slid/containers/Slid';
 
-export default class Presentation extends React.Component {
+class Presentation extends React.Component {
     constructor(props) {
         super(props);
 
@@ -30,6 +31,7 @@ export default class Presentation extends React.Component {
     }
 
     displaySlids() {
+        console.log('displaySlids');
         let slidMap = this.props.slidArray.map(
             (slid) =>
                 <Slid id={slid.id} title={slid.title} txt={slid.txt}
@@ -39,6 +41,12 @@ export default class Presentation extends React.Component {
     }
 
     render() {
+        console.log('render');
+        const slidMap = this.props.slidArray.map(
+            (slid) =>
+                <Slid id={slid.id} title={slid.title} txt={slid.txt}
+                    content_id={slid.content_id} contentMap={this.props.contentMap} displayMode="SHORT" />
+        );
         return (
             <React.Fragment>
                 <div className="form-group">
@@ -61,9 +69,19 @@ export default class Presentation extends React.Component {
                     </textarea>
                 </div>
                 <div>
-                    {this.displaySlids()}
+                    {slidMap}
                 </div>
             </React.Fragment>
         );
     }
 }
+
+const mapStateToProps = (state, ownProps) => {
+    let newSlidArray = ownProps.slidArray;
+    newSlidArray[state.updateModelReducer.presentation.id] = state.updateModelReducer.presentation;
+    return {
+        slidArray: newSlidArray,
+    }
+};
+
+export default connect(mapStateToProps)(Presentation);

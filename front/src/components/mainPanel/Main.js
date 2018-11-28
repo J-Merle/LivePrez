@@ -2,7 +2,7 @@ import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import globalReducer from '../../reducer/index';
-import { updateContentMap } from '../../actions/index';
+import { updateContentMap, updatePresentation } from '../../actions/index';
 import './main.css';
 import '../../lib/bootstrap-3.3.7-dist/css/bootstrap.min.css';
 import BrowseContentPanel from '../browseContentPanel/containers/BrowseContentPanel';
@@ -19,8 +19,8 @@ export default class Main extends React.Component {
         this.state = {
             contentMap: contentMapTmp.default,
             presMap: presTmp.default
-        }
-        store.dispatch(updateContentMap(contentMapTmp));
+        };
+        store.dispatch(updatePresentation(presTmp), updateContentMap(contentMapTmp));
     }
 
     render() {
