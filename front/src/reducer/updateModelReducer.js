@@ -1,7 +1,6 @@
 var Tools = require('../services/Tools.js');
 
 const updateModelReducer = (state = { presentation: {}, content_map: {} }, action) => {
-    console.log('action type: '+action.type)
     switch (action.type) {
         case 'UPDATE_PRESENTATION':
             return state;

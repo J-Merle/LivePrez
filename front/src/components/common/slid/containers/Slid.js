@@ -33,16 +33,14 @@ class Slid extends React.Component {
         e.preventDefault();
         this.setState({
             title: e.target.value
-        });
-        this.updateSlid(this.props.id, this.state.title, this.state.txt, this.props.content_id);
+        }, this.updateSlid);
     }
 
     handleChangeTxt(e) {
         e.preventDefault();
         this.setState({
             txt: e.target.value
-        });
-        this.updateSlid(this.props.id, this.state.title, this.state.txt, this.props.content_id);
+        }, this.updateSlid);
     }
 
     updateSelectedSlid() {
@@ -57,12 +55,12 @@ class Slid extends React.Component {
         }
     }
 
-    updateSlid(id, title, txt, content_id) {
+    updateSlid() {
         const newSlid = {
-            id: id,
-            title: title,
-            txt: txt,
-            content_id: content_id
+            id: this.props.id,
+            title: this.state.title,
+            txt: this.state.txt,
+            content_id: this.props.content_id
         };
         this.props.dispatch(updateSlid(newSlid));
     }

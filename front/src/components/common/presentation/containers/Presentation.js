@@ -11,7 +11,7 @@ class Presentation extends React.Component {
         this.state = {
             title: this.props.title,
             description: this.props.description
-        }
+        };
 
         this.handleChangeTitle = this.handleChangeTitle.bind(this);
         this.handleChangeDesc = this.handleChangeDesc.bind(this);
@@ -31,22 +31,18 @@ class Presentation extends React.Component {
     }
 
     displaySlids() {
-        console.log('displaySlids');
         let slidMap = this.props.slidArray.map(
             (slid) =>
                 <Slid id={slid.id} title={slid.title} txt={slid.txt}
                     content_id={slid.content_id} contentMap={this.props.contentMap} displayMode="SHORT" />
         );
+
         return slidMap;
     }
 
     render() {
-        console.log('render');
-        const slidMap = this.props.slidArray.map(
-            (slid) =>
-                <Slid id={slid.id} title={slid.title} txt={slid.txt}
-                    content_id={slid.content_id} contentMap={this.props.contentMap} displayMode="SHORT" />
-        );
+        const slidMap = this.displaySlids();
+
         return (
             <React.Fragment>
                 <div className="form-group">
@@ -77,10 +73,13 @@ class Presentation extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    let newSlidArray = ownProps.slidArray;
-    newSlidArray[state.updateModelReducer.presentation.id] = state.updateModelReducer.presentation;
+    let newSlidArray = ownProps.slidArray.slice();
+    let index = newSlidArray.map((slid) => slid.id).indexOf(state.updateModelReducer.presentation.id);
+
+    newSlidArray[index] = state.updateModelReducer.presentation;
+
     return {
-        slidArray: newSlidArray,
+        slidArray: newSlidArray
     }
 };
 
