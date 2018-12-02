@@ -51,7 +51,7 @@ this.getNewFileName = function(id, originalFileName) {
 };
 
 this.logRequest = function(request, response) {
-  var color =response.statusCode == 200 ? "\x1b[32m" : "\x1b[31m";
+  var color =[200, 201, 302].indexOf(response.statusCode) != -1 ? "\x1b[32m" : "\x1b[31m";
   var endColor = "\x1b[0m";
   console.log(`${color}${response.statusCode} ${endColor} - ${request.method} ${request.path}`);
   if(request.body !== undefined) {
