@@ -1,6 +1,7 @@
 <head></head>
 <body>
   <h1>lol</h1>
+  <img id="image" src=""/>
   <script type="text/javascript" src="/socket.io/socket.io.js">
 
 
@@ -11,6 +12,10 @@
     socket.emit('connection');
     socket.on('connection', () => {
       socket.emit('_data_com_', socket.id);
+      socket.on('currentSlidEvent', function(data) {
+        console.log("Got currentSlideEvent");
+        document.getElementById.src = data.src;
+      })
     });
 
   </script>
