@@ -45,3 +45,18 @@ Methode | Endpoint
 
 Un fonction de log permettant de suivre les appels aux endpoint
 ![alt text](./screen_log.png)
+
+## React
+
+### Ce qui marche
+
+- Le côté visual statique avant l'ajout des reducers
+- la modification de slid
+
+### Ce qui marche partiellement
+
+- le drag & drop
+- la dialog d'ajout 
+
+### Ce qui ne me marche pas
+- Je ne suis pas parvenu à faire marcher les reducers complètement
