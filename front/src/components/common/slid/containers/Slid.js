@@ -12,7 +12,8 @@ class Slid extends React.Component {
 
         this.state = {
             title: this.props.title,
-            txt: this.props.txt
+            txt: this.props.txt,
+            content_id: this.props.content_id
         };
 
         this.handleChangeTitle = this.handleChangeTitle.bind(this);
@@ -20,12 +21,15 @@ class Slid extends React.Component {
 
         this.updateSelectedSlid = this.updateSelectedSlid.bind(this);
         this.updateSlid = this.updateSlid.bind(this);
+
+        this.drop = this.drop.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
             title: nextProps.title,
-            txt: nextProps.txt
+            txt: nextProps.txt,
+            content_id: nextProps.content_id
         });
     }
 
@@ -49,7 +53,7 @@ class Slid extends React.Component {
                 id: this.props.id,
                 title: this.props.title,
                 txt: this.props.txt,
-                content_id: this.props.content_id
+                content_id: this.state.content_id
             };
             this.props.dispatch(setSelectedSlid(tmpSlid));
         }
@@ -60,20 +64,32 @@ class Slid extends React.Component {
             id: this.props.id,
             title: this.state.title,
             txt: this.state.txt,
-            content_id: this.props.content_id
+            content_id: this.state.content_id
         };
         this.props.dispatch(updateSlid(newSlid));
     }
 
+    allowDrop(e) {
+        e.preventDefault();
+    }
+
+    drop(e) {
+        e.preventDefault();
+        console.log(this.props.draggedElement);
+        this.setState({
+            content_id: this.props.draggedElement
+        }, this.updateSlid());
+    }
+
     render() {
-        let content = this.props.contentMap[this.props.content_id];
+        let content = this.props.contentMap[this.state.content_id];
         if (content === undefined) {
             content = this.props.contentMap['1'];
         }
 
         let fullMng = this.props.displayMode === 'FULL_MNG';
         return (
-            <div className="slid" onClick={() => { this.updateSelectedSlid() }}>
+            <div className="slid" onClick={() => this.updateSelectedSlid()} onDrop={this.drop} onDragOver={this.allowDrop}>
                 <div>
                     <h1>{this.state.title}</h1>
                     <p>{this.state.txt}</p>
@@ -89,4 +105,10 @@ class Slid extends React.Component {
     }
 }
 
-export default connect()(Slid);
+const mapStateToProps = (state, ownProps) => {
+    return {
+        draggedElement: state.selectedReducer.draggedElt
+    };
+};
+
+export default connect(mapStateToProps)(Slid);

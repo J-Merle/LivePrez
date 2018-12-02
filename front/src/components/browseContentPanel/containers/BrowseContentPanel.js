@@ -1,5 +1,6 @@
 import React from 'react';
 import Content from '../../common/content/containers/Content';
+import AddContentPanel from '../../addContentPanel/containers/AddContentPanel';
 
 export default class BrowseContentPanel extends React.Component {
     constructor(props) {
@@ -15,7 +16,7 @@ export default class BrowseContentPanel extends React.Component {
         
         let contentList = contentArray.map(
             (content, index) => 
-                <Content id={index} src={content.src} title={content.title} 
+                <Content id={content.id} src={content.src} title={content.title} 
                     type={content.type} onlyContent={false}/>
         )
         return contentList;
@@ -24,6 +25,7 @@ export default class BrowseContentPanel extends React.Component {
     render() {
         return(
             <React.Fragment>
+                <AddContentPanel/>
                 {this.displayContentList()}
             </React.Fragment>
         );

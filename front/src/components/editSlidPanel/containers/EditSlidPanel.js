@@ -21,8 +21,14 @@ class EditSlidPanel extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
+    let newSlid;
+    if(state.selectedReducer.slid !== undefined) {
+        newSlid = state.selectedReducer.slid;
+    } else {
+        newSlid = ownProps.selected_slid;
+    }
     return {
-        selected_slid: state.selectedReducer.slid,
+        selected_slid: newSlid,
     }
 };
 
