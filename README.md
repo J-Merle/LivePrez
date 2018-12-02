@@ -6,6 +6,19 @@ Github : https://github.com/J-Merle/LivePrez
 
 Tout est fonctionnel
 
+### Conf
+Datasource : `java:jboss/datasources/ProjetDS`
+
+Queue : `java:/jms/queue/watcherqueue`
+
+Topic : `java:/jms/watcherAuthJMS`
+
+### SQL
+La création automatique par hibernate de la table `User` est activé, 
+peut être modifié dans le fichier `persistence.xml` du MiddleAuthWatcherEJBClient.
+
+Le fichier `import.sql` sert pour l'import d'un jeux de test lors de la crétion automatique.
+
 ## Middle Node
 
 Des configurations postman sont fournies et permettent de tester tous les endpoint.
