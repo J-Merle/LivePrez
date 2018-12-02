@@ -11,6 +11,7 @@ exports.listen = function(httpServer) {
     socket.emit('connection');
     socket.on('_data_com_', function(data) {
       mapSocket[data] = socket;
+      console.log('a');
     });
     socket.on('slidEvent', function(data) {
       parsedData = JSON.parse(data);
