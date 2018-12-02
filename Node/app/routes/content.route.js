@@ -1,5 +1,4 @@
-'use strict';
-
+'use strict'; 
 var express = require("express");
 var multer = require("multer");
 var contentController = require("./../controllers/content.controller");

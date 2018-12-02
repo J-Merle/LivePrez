@@ -6,9 +6,9 @@ const http = require("http");
 const path = require("path");
 const CONFIG = require("./config.json");
 const bodyParser = require('body-parser');
-//const jsonParser = bodyParser.json();
+const jsonParser = bodyParser.json();
 //
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 process.env.CONFIG = JSON.stringify(CONFIG);
 
 const defaultRoute = require("./app/routes/default.route.js");
