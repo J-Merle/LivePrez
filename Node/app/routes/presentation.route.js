@@ -54,7 +54,8 @@ router.route("/loadPres").get(function(request, response){
 });
 
 router.route("/savePres").post(function(request, response){
-  let presentation = request.body;
+  let pres = request.body;
+  console.log(pres);
 
   // A presentation without id can not be saved
   if(!pres.id) {
