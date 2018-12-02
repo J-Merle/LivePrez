@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "c2d48be0-bef2-45ef-a5c8-f1af4184621b",
+		"name": "TP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "127.0.0.1:1337/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"login\": \"admin\",\n\t\"pwd\": \"pwd\"\n}"
+				},
+				"url": {
+					"raw": "127.0.0.1:1337/login",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "1337",
+					"path": [
+						"login"
+					],
+					"query": [
+						{
+							"key": "login",
+							"value": "john",
+							"disabled": true
+						},
+						{
+							"key": "pwd",
+							"value": "samuel",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:1337/contents",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "type",
+							"value": "img",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "title",
+							"value": "mytitle",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "src",
+							"value": "gdgdgfd",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:1337/contents",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "1337",
+					"path": [
+						"contents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:1337/contents",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "type",
+							"value": "typelol",
+							"type": "text"
+						},
+						{
+							"key": "title",
+							"value": "mytitle",
+							"type": "text"
+						},
+						{
+							"key": "src",
+							"value": "http://google.fr",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:1337/contents",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "1337",
+					"path": [
+						"contents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:1337/contents/66ed0bf7-cf47-4dfb-a12a-35e974f2165a",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:1337/contents/66ed0bf7-cf47-4dfb-a12a-35e974f2165a",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "1337",
+					"path": [
+						"contents",
+						"66ed0bf7-cf47-4dfb-a12a-35e974f2165a"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:1337/loadPres",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "127.0.0.1:1337/loadPres",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "1337",
+					"path": [
+						"loadPres"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "127.0.0.1:1337/savePres",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "\n    {\n        \"id\": \"3\",\n        \"title\": \"this is my presentation\",\n        \"description\": \"bla bla bla bla blabla\",\n        \"slidArray\": [\n            {\n                \"id\": \"1\",\n                \"title\": \"A\",\n                \"txt\": \"some txt here\",\n                \"content_id\": \"66ed0bf7-cf47-4dfb-a12a-35e974f2165a\"\n            },\n            {\n                \"id\": \"2\",\n                \"title\": \"B\",\n                \"txt\": \" new slid no text\",\n                \"content_id\": \"800c7731-5406-4bb0-8984-858641996f61\"\n            }\n        ]\n    }\n"
+				},
+				"url": {
+					"raw": "127.0.0.1:1337/savePres",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "1337",
+					"path": [
+						"savePres"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

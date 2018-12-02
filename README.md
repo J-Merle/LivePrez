@@ -35,11 +35,10 @@ Methode | Endpoint
 
 - Login OK
 
-- Websockets côté serveur OK
-
 
 ### Ce qui marche partiellement
-La partie client web socket est incomplète
+
+- Websockets
 
 
 ### Ce qui a été fait en plus

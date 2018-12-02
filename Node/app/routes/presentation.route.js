@@ -34,7 +34,7 @@ router.route("/loadPres").get(function(request, response){
     files.forEach(function(fileName,index){
       fs.readFile(CONFIG.presentationDirectory + fileName, function(errFile, content){
         if(err) {
-          console.log(errFile.message);
+          console.log(err.message);
           response.writeHead(500, {"Content-Type" : "application/json"});
           response.end();
           utils.logRequest(request, response);
@@ -55,16 +55,25 @@ router.route("/loadPres").get(function(request, response){
 
 router.route("/savePres").post(function(request, response){
   let pres = request.body;
-  console.log(pres);
 
   // A presentation without id can not be saved
   if(!pres.id) {
-    response.writeHead(422);
+    response.writeHead(422, {"Content-Type" : "application/json"});
     response.end("Unprocessable entity");
-    return -1;
+    utils.logRequest(request, response);
+    return;
   }
 
-  fs.writeFile(path.join(CONFIG.presentationDirectory))
-
-
+  fs.writeFile(`${CONFIG.presentationDirectory}${pres.id}.pres.json`, JSON.stringify(pres), function(err){
+    if(err) {
+      response.writeHead(500, {"Content-Type" : "application/json"});
+      response.end(err);
+      utils.logRequest(request, response);
+      return;
+    } 
+    response.writeHead(201, {"Content-Type" : "application/json"});
+    response.end();
+    utils.logRequest(request, response);
+    return;
+  });
 });
