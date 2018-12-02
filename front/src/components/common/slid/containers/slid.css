@@ -1,0 +1,39 @@
+.slid {
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    margin-bottom: 2vh;
+    padding-left: 0.5vw;
+    padding-right: 0.5vw;
+}
+
+.height-100{
+    height: 100%;
+}
+
+.height-90{
+    height: 90%;
+}
+
+.height-10{
+    height: 10%;
+}
+
+.height-20{
+    height: 20%;
+}
+
+.height-30{
+    height: 30%;
+}
+
+.height-70{
+    height: 70%;
+}
+
+.height-80{
+    height: 80%;
+}
+
+.vertical-scroll{
+    overflow-y: auto; 
+}

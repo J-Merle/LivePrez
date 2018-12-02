@@ -1,0 +1,10 @@
+.content {
+    border: 1px solid lightgray;
+    border-radius: 6px;
+    margin-bottom: 1vh;
+    text-align: center;
+}
+
+img {
+    max-width: 100%;
+}
