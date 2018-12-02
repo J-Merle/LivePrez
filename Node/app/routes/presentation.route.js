@@ -15,7 +15,7 @@ router.route("/loadPres").get(function(request, response){
   fs.readdir(CONFIG.presentationDirectory, (err, files) => {
 
     if(err) {
-      console.log(errFile.message);
+      console.log(err.message);
       response.writeHead(500, {"Content-Type" : "application/json"});
       response.end();
       utils.logRequest(request, response);
