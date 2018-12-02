@@ -2,6 +2,8 @@
 
 Github : https://github.com/J-Merle/LivePrez
 
+Vidéo : https://youtu.be/ds_XOwKQLVQ
+
 ## Auth JEE
 
 Tout est fonctionnel
@@ -21,7 +23,7 @@ Le fichier `import.sql` sert pour l'import d'un jeux de test lors de la crétion
 
 ## Middle Node
 
-Des configurations postman sont fournies et permettent de tester tous les endpoint.
+Des configurations postman sont fournies et permettent de tester tous les endpoint. (`TP.postman_collection.json`)
 
 Il faut bien penser à adapter les chemins dans le fichier `conf.json`.
 
