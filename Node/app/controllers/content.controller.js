@@ -53,7 +53,6 @@ exports.list = function(request, response) {
 
 
 exports.create = function(request, response) {
-  console.log(request.body);
   const contentData = {
     id: utils.generateUUID(),
     type: request.body.type,
